@@ -16,7 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="topbar flex justify-between items-center px-16 py-5 border-b border-pb_gray_300/60 w-full fixed bg-white z-10">
+          <h4 className="font-semibold text-lg">Carbon Footprint</h4>
+        </div>
+        {children}
+      </body>
     </html>
   )
 }
