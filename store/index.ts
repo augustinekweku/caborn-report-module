@@ -2,12 +2,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
-import authReducer from "./auth-reducer";
-
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
-import snackbarReducer from "./snackbar-reducer";
-import genericDialogReducer from "./generic-dialog-reducer";
-import genericConfirmReducer from "./generic-confirm-reducer";
+
+import reportModuleReducer from "./report-module-reducer";
 
 const createNoopStorage = () => {
   return {
@@ -33,11 +30,16 @@ const persistAuthStoreConfig = {
   storage,
 };
 
+const persistReportModuleStoreConfig = {
+  key: "reportModule",
+  storage,
+};
+
 const rootReducer = combineReducers({
-  auth: persistReducer(persistAuthStoreConfig, authReducer),
-  snackbar: snackbarReducer,
-  genericDialog: genericDialogReducer,
-  genericConfirmModal: genericConfirmReducer,
+  reportModule: persistReducer(
+    persistReportModuleStoreConfig,
+    reportModuleReducer
+  ),
 });
 
 export const store = configureStore({

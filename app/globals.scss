@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media print {
+  @page {
+    size: US-Letter portrait !important;
+    background-image: url("../public//assets//images//report-bg.jpg") !important;
+    padding: 3in 0.5in 0.75in 0.5in !important;
+  }
+
+  .page-break {
+    page-break-inside: avoid;
+    padding-top: 100px;
+
+    &:first-child() {
+      padding-top: 0px !important;
+    }
+  }
+  .no-print {
+    display: none;
+  }
+  .full-width-on-print {
+    width: 100% !important;
+    background-size: 100% 297mm !important;
+    padding-top: 0px !important;
+  }
+  .unset-grid-on-print {
+    grid-template-columns: unset !important;
+  }
+  .show-on-print {
+    display: block !important;
+  }
+  .ql-toolbar {
+    display: none !important;
+  }
+  .ql-container {
+    border: none !important;
+  }
+}
+
+.recharts-legend-wrapper {
+  width: 100% !important;
+}

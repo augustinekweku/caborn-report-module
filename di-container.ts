@@ -2,9 +2,11 @@ import axios from "axios";
 import { AxiosClient } from "./utils/clients";
 
 import { store } from "./store";
-import { authActions } from "./store/auth-reducer";
-import AuthService from "./services/apis/auth-service";
-import DashboardService from "./services/apis/dashboard-service";
+import { reportModuleActions } from "./store/report-module-reducer";
+import ReportRepository from "./respositories/report-repository";
+import ReportService from "./services/report-service";
+import EntityRepository from "./respositories/entity-repository";
+import EntityService from "./services/entity-service";
 
 export const serverSideClient = new AxiosClient(axios, {
   headers: {
@@ -12,11 +14,24 @@ export const serverSideClient = new AxiosClient(axios, {
   },
 });
 
+// client
+const client = new AxiosClient(axios);
+
+// repositories
+const reportRepository = new ReportRepository(client);
+const entityRepository = new EntityRepository(client);
+
 // services
-const authService = new AuthService(store, authActions);
+const reportService = new ReportService(
+  reportRepository,
+  store,
+  reportModuleActions
+);
+const entityService = new EntityService(entityRepository);
 
 const DI = {
-  authService,
+  reportService,
+  entityService,
 };
 
 export default DI;

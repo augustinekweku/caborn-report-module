@@ -162,3 +162,87 @@ export interface DataTableColumnType {
   width?: number;
   valueGetter?: (params: any) => any;
 }
+
+export type EmissionHistoryData = {
+  id: string;
+  name: string;
+  data: EmissionData[];
+};
+export type EntityEmissionStatisticalData = {
+  emissionsSummary: {
+    scope1: EmissionData;
+    scope2: EmissionData;
+    scope3: EmissionData;
+    scopeCategoriesEmissions: EmissionData[];
+    total: number;
+  };
+};
+
+export type EntityEmissionsSummary = {
+  keyPerformanceIndicators: EmissionData[];
+  emissionsHistories: EmissionHistoryData[];
+};
+export interface Entity {
+  id: string;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+  legalName: string;
+  description: string;
+  hasEmissions: boolean;
+  bandwidth: string;
+  bandwidthDeviationValue?: string | number;
+  country: string;
+  zipCode: string;
+  address: string;
+  activity: string;
+  path: string;
+  activityDomain: string;
+  activitySubdomain: string;
+  activityDescription: string;
+  measuringUnit: "imperial" | "metric";
+  currency: string;
+  reportingPeriodStartDate: string;
+  reportingPeriodEndDate: string;
+  referencePeriodStartDate: string;
+  referencePeriodEndDate: string;
+  consolidationType: string;
+  consolidationPercentages: ConsolidationPercentage[];
+  createdBy: string;
+  company: string;
+  carbonId: string;
+  parents: string[];
+  isArchived: boolean;
+  isRoot: boolean;
+  children: EntitySummary[];
+  allowedUsers: UserSummary[];
+  emissionsSummary: EmissionSummary;
+}
+
+export type EmissionSummary = {
+  totalEmissions: {
+    id: string;
+    name: string;
+    emissions: number;
+    error: null | string;
+    status: string;
+    period: string;
+  };
+  emissionsByScope: {
+    id: string;
+    name: string;
+    emissions: number;
+    error: null | string;
+    status: string;
+    period: string;
+  }[];
+};
+
+export interface EntityStructure extends Entity {
+  children: EntityStructure[];
+  key: string;
+  type: string;
+  styleClass: string;
+  label?: string;
+}

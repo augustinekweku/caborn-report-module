@@ -50,9 +50,7 @@ export class AxiosClient {
         const accessToken = getCookie(COOKIE_KEY);
 
         if (accessToken) {
-          config.headers.Authorization = `Bearer ${decryptToken(
-            accessToken as string
-          )}`;
+          config.headers.Authorization = `Bearer ${accessToken as string}`;
         }
         return config;
       },
